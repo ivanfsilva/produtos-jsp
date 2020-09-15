@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import beans.BeanCursoJsp;
+import beans.BeanUsuario;
 import connection.SingleConnection;
 
 public class DaoUsuario {
@@ -18,12 +18,13 @@ public class DaoUsuario {
 		connection = SingleConnection.getConnection();
 	}
 
-	public void salvar(BeanCursoJsp usuario) {
+	public void salvar(BeanUsuario usuario) {
 		try {
-			String sql = "INSERT INTO usuario (usuario, senha) VALUES (?, ?);";
+			String sql = "INSERT INTO usuario (login, senha, nome) VALUES (?, ?, ?);";
 			PreparedStatement stm = connection.prepareStatement(sql);
 			stm.setString(1, usuario.getLogin());
 			stm.setString(2, usuario.getSenha());
+			stm.setString(3, usuario.getNome());
 			stm.execute();
 			connection.commit();
 		} catch (SQLException e) {
@@ -36,25 +37,26 @@ public class DaoUsuario {
 		}
 	}
 
-	public List<BeanCursoJsp> listar() throws SQLException {
-		List<BeanCursoJsp> listar = new ArrayList<>();
+	public List<BeanUsuario> listar() throws SQLException {
+		List<BeanUsuario> listar = new ArrayList<>();
 
 		String sql = "SELECT * FROM usuario;";
 		PreparedStatement stm = connection.prepareStatement(sql);
 		ResultSet rst = stm.executeQuery();
 		while (rst.next()) {
-			BeanCursoJsp beanCursoJsp = new BeanCursoJsp();
-			beanCursoJsp.setId(rst.getLong("id"));
-			beanCursoJsp.setLogin(rst.getString("usuario"));
-			beanCursoJsp.setSenha(rst.getString("senha"));
+			BeanUsuario beanUsuario = new BeanUsuario();
+			beanUsuario.setId(rst.getLong("id"));
+			beanUsuario.setLogin(rst.getString("login"));
+			beanUsuario.setSenha(rst.getString("senha"));
+			beanUsuario.setNome(rst.getString("nome"));
 
-			listar.add(beanCursoJsp);
+			listar.add(beanUsuario);
 		}
 		return listar;
 	}
 	
-	public void delete(String login) {
-		String sql = "DELETE FROM usuario WHERE usuario = '" + login + "'";
+	public void delete(String id) {
+		String sql = "DELETE FROM usuario WHERE id = '" + id + "'";
 		
 		try {
 			PreparedStatement stm;
@@ -72,29 +74,31 @@ public class DaoUsuario {
 		
 	}
 
-	public BeanCursoJsp consultar(String usuario) throws SQLException {
-		String sql = "SELECT * FROM usuario WHERE usuario = '" + usuario + "'";
+	public BeanUsuario consultar(String id) throws SQLException {
+		String sql = "SELECT * FROM usuario WHERE id = " + id;
 		PreparedStatement stm = connection.prepareStatement(sql);
 		ResultSet rst = stm.executeQuery();
 		
 		if (rst.next()) {
-			BeanCursoJsp beanCursoJsp = new BeanCursoJsp();
-			beanCursoJsp.setId(rst.getLong("id"));
-			beanCursoJsp.setLogin(rst.getString("usuario"));
-			beanCursoJsp.setSenha(rst.getString("senha"));
+			BeanUsuario beanUsuario = new BeanUsuario();
+			beanUsuario.setId(rst.getLong("id"));
+			beanUsuario.setLogin(rst.getString("login"));
+			beanUsuario.setSenha(rst.getString("senha"));
+			beanUsuario.setNome(rst.getString("nome"));
 			
-			return beanCursoJsp;
+			return beanUsuario;
 		}
 		return null;		
 	}
 
-	public void atualizar(BeanCursoJsp usuario) {
-		String sql = "UPDATE usuario SET login = ?, senha = ? WHERE id = " + usuario.getId();
+	public void atualizar(BeanUsuario usuario) {
+		String sql = "UPDATE usuario SET login = ?, senha = ?, nome = ? WHERE id = " + usuario.getId();
 		
 		try {
 			PreparedStatement stm = connection.prepareStatement(sql);
 			stm.setString(1, usuario.getLogin());
 			stm.setString(2, usuario.getSenha());
+			stm.setString(3, usuario.getNome());
 			stm.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

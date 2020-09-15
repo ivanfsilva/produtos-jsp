@@ -1,0 +1,7 @@
+
+
+ALTER TABLE usuario
+    ADD COLUMN nome CHARACTER VARYING(100);
+    
+ALTER TABLE public.usuario
+    ADD COLUMN id Serial PRIMARY KEY;

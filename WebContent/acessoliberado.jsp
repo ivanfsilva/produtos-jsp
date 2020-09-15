@@ -1,4 +1,4 @@
-<jsp:useBean id="calcula" class="beans.BeanCursoJsp" type="beans.BeanCursoJsp" scope="page"></jsp:useBean>
+<jsp:useBean id="calcula" class="beans.BeanUsuario" type="beans.BeanUsuario" scope="page"></jsp:useBean>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -11,6 +11,6 @@
 	<jsp:setProperty property="*" name="calcula"/>
 	<h3>Seja bem vindo ao sistema em JSP</h3>
 	
-	<a href="cadastroUsuario.jsp">Cadastro de usuários</a>
+	<a href="salvarUsuario?acao=listartodos">Cadastro de usuários</a>
 </body>
 </html>
