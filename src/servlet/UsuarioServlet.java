@@ -24,19 +24,49 @@ public class UsuarioServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String acao = request.getParameter("acao");
+		String user = request.getParameter("user");
 		
+		if (acao.equalsIgnoreCase("delete")) {
+			daoUsuario.delete(user);
+			
+			redirecionaCadastroUsuario(request, response);
+		} else if ( acao.equalsIgnoreCase("editar") ) {
+			BeanCursoJsp usuario = new BeanCursoJsp();
+			
+			try {
+				daoUsuario.consultar(user);
+				RequestDispatcher view = request.getRequestDispatcher("/cadastroUsuario.jsp");
+				request.setAttribute("user", usuario);
+				view.forward(request, response);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
 		
 		BeanCursoJsp usuario = new BeanCursoJsp();
+		usuario.setId(!id.isEmpty() ? Long.parseLong(id) : 0);
 		usuario.setLogin(login);
 		usuario.setSenha(senha);
 		
-		daoUsuario.salvar(usuario);
+		if (id == null || id.isEmpty()) {
+			daoUsuario.salvar(usuario);
+		} else {
+			daoUsuario.atualizar(usuario);
+		}
 		
+		
+		redirecionaCadastroUsuario(request, response);
+	}
+	
+	private void redirecionaCadastroUsuario(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException {
 		RequestDispatcher view = request.getRequestDispatcher("/cadastroUsuario.jsp");
 		try {
 			request.setAttribute("usuarios", daoUsuario.listar());
@@ -45,5 +75,4 @@ public class UsuarioServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
 }
