@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -7,7 +8,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Bem vindo ao sistema de produtos em JSP</h1>
-	<% out.print("seu sucesso garantido!"); %>
+	<c:out value="${'Bem vindo ao JSTL'}" />
+	<form action="LoginServlet" method="post">
+		Login:
+		<input type="text" id="login" name="login" />
+		<br/>
+		Senha:
+		<input type="password" id="senha" name="senha" />
+		<br/>
+		<input type="submit" value="Logar" />
+		<br/>
+	</form>
 </body>
 </html>
