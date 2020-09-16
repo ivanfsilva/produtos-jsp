@@ -3,5 +3,8 @@
 ALTER TABLE usuario
     ADD COLUMN nome CHARACTER VARYING(100);
     
+ALTER TABLE usuario
+    ADD COLUMN telefone CHARACTER VARYING(50);
+    
 ALTER TABLE public.usuario
     ADD COLUMN id Serial PRIMARY KEY;

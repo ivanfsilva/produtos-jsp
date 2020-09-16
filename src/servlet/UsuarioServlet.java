@@ -60,12 +60,14 @@ public class UsuarioServlet extends HttpServlet {
 			String login = request.getParameter("login");
 			String senha = request.getParameter("senha");
 			String nome = request.getParameter("nome");
+			String telefone = request.getParameter("telefone");
 
 			BeanUsuario usuario = new BeanUsuario();
 			usuario.setId(!id.isEmpty() ? Long.parseLong(id) : 0);
 			usuario.setLogin(login);
 			usuario.setSenha(senha);
 			usuario.setNome(nome);
+			usuario.setTelefone(telefone);
 
 			try {
 				if (id == null || id.isEmpty() && !daoUsuario.validarLogin(login)) {

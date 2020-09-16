@@ -20,11 +20,12 @@ public class DaoUsuario {
 
 	public void salvar(BeanUsuario usuario) {
 		try {
-			String sql = "INSERT INTO usuario (login, senha, nome) VALUES (?, ?, ?);";
+			String sql = "INSERT INTO usuario (login, senha, nome, telefone) VALUES (?, ?, ?, ?);";
 			PreparedStatement stm = connection.prepareStatement(sql);
 			stm.setString(1, usuario.getLogin());
 			stm.setString(2, usuario.getSenha());
 			stm.setString(3, usuario.getNome());
+			stm.setString(4, usuario.getTelefone());
 			stm.execute();
 			connection.commit();
 		} catch (SQLException e) {
@@ -49,6 +50,7 @@ public class DaoUsuario {
 			beanUsuario.setLogin(rst.getString("login"));
 			beanUsuario.setSenha(rst.getString("senha"));
 			beanUsuario.setNome(rst.getString("nome"));
+			beanUsuario.setTelefone(rst.getString("telefone"));
 
 			listar.add(beanUsuario);
 		}
@@ -85,6 +87,7 @@ public class DaoUsuario {
 			beanUsuario.setLogin(rst.getString("login"));
 			beanUsuario.setSenha(rst.getString("senha"));
 			beanUsuario.setNome(rst.getString("nome"));
+			beanUsuario.setTelefone(rst.getString("telefone"));
 			
 			return beanUsuario;
 		}
@@ -103,13 +106,16 @@ public class DaoUsuario {
 	}
 
 	public void atualizar(BeanUsuario usuario) {
-		String sql = "UPDATE usuario SET login = ?, senha = ?, nome = ? WHERE id = " + usuario.getId();
+		String sql = "UPDATE usuario "
+				+ " SET login = ?, senha = ?, nome = ?, telefone = ? "
+				+ " WHERE id = " + usuario.getId();
 		
 		try {
 			PreparedStatement stm = connection.prepareStatement(sql);
 			stm.setString(1, usuario.getLogin());
 			stm.setString(2, usuario.getSenha());
 			stm.setString(3, usuario.getNome());
+			stm.setString(4, usuario.getTelefone());
 			stm.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

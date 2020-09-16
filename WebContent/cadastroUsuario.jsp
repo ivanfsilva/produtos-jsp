@@ -43,6 +43,12 @@
 						</td>
 					</tr>
 					<tr>
+						<td>Telefone:</td>
+						<td>
+							<input type="text" id="telefone" name="telefone" value="${user.telefone }"/>	
+						</td>
+					</tr>
+					<tr>
 						<td></td>
 						<td>
 							<input type="submit" value="Salvar" />
@@ -57,28 +63,42 @@
 	
 	<div class="container">
 		<table class="responsive-table">
+			<thead>
+			    <tr>
+			      <th>ID</th>
+			      <th>LOGIN</th>
+			      <th>NOME</th>
+			      <th>TELEFONE</th>
+			      <th>AÇÃO</th>
+			    </tr>
+			</thead>
 			<caption>Usuários Cadastrados</caption>
-			<c:forEach items="${ usuarios }" var="user">
-			<tr>
-				<td style="width: 150px;">
-					<c:out value="${user.id}"></c:out>
-				</td>
-				<td style="width: 150px;">
-					<c:out value="${user.login}"></c:out>
-				</td>
-				<td>
-					<c:out value="${user.nome}"></c:out>
-				</td>
-				<td>
-					<a href="salvarUsuario?acao=delete&user=${user.id}"><img src="resources/img/excluir.png" 
-					alt="Excluir" title="Excluir" width="20px" height="20px" /></a>
-				</td>
-				<td>
-					<a href="salvarUsuario?acao=editar&user=${user.id}"><img src="resources/img/editar.png" 
-					alt="Editar" title="Editar" width="20px" height="20px" /></a>
-				</td>
-			</tr>
-			</c:forEach>
+			<tbody>
+				<c:forEach items="${ usuarios }" var="user">
+					<tr>
+						<td style="width: 150px;">
+							<c:out value="${user.id}"></c:out>
+						</td>
+						<td style="width: 150px;">
+							<c:out value="${user.login}"></c:out>
+						</td>
+						<td>
+							<c:out value="${user.nome}"></c:out>
+						</td>
+						<td>
+							<c:out value="${user.telefone}"></c:out>
+						</td>
+						<td>
+							<a href="salvarUsuario?acao=delete&user=${user.id}"><img src="resources/img/excluir.png" 
+							alt="Excluir" title="Excluir" width="20px" height="20px" /></a>
+						</td>
+						<td>
+							<a href="salvarUsuario?acao=editar&user=${user.id}"><img src="resources/img/editar.png" 
+							alt="Editar" title="Editar" width="20px" height="20px" /></a>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
 		</table>
 	</div>
 </body>
