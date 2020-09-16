@@ -34,12 +34,11 @@ public class UsuarioServlet extends HttpServlet {
 			redirecionaCadastroUsuario(request, response);
 		} else if (acao.equalsIgnoreCase("editar")) {
 
-			//BeanUsuario usuario = new BeanUsuario();
-
 			try {
 				BeanUsuario usuario = daoUsuario.consultar(user);
 				RequestDispatcher view = request.getRequestDispatcher("/cadastroUsuario.jsp");
 				request.setAttribute("user", usuario);
+				request.setAttribute("usuarios", daoUsuario.listar());
 				view.forward(request, response);
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -73,9 +72,8 @@ public class UsuarioServlet extends HttpServlet {
 			} else {
 				daoUsuario.atualizar(usuario);
 			}
-			//redirecionaCadastroUsuario(request, response);
+			redirecionaCadastroUsuario(request, response);
 		}
-		//redirecionaCadastroUsuario(request, response);
 	}
 
 	private void redirecionaCadastroUsuario(HttpServletRequest request, HttpServletResponse response)
