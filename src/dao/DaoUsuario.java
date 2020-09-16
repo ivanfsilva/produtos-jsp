@@ -40,7 +40,7 @@ public class DaoUsuario {
 	public List<BeanUsuario> listar() throws SQLException {
 		List<BeanUsuario> listar = new ArrayList<>();
 
-		String sql = "SELECT * FROM usuario;";
+		String sql = "SELECT * FROM usuario ORDER BY nome, id;";
 		PreparedStatement stm = connection.prepareStatement(sql);
 		ResultSet rst = stm.executeQuery();
 		while (rst.next()) {
