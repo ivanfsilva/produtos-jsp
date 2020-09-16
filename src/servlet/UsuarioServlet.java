@@ -63,7 +63,7 @@ public class UsuarioServlet extends HttpServlet {
 			String telefone = request.getParameter("telefone");
 
 			BeanUsuario usuario = new BeanUsuario();
-			usuario.setId(!id.isEmpty() ? Long.parseLong(id) : 0);
+			usuario.setId(!id.isEmpty() ? Long.parseLong(id) : null);
 			usuario.setLogin(login);
 			usuario.setSenha(senha);
 			usuario.setNome(nome);
@@ -72,6 +72,7 @@ public class UsuarioServlet extends HttpServlet {
 			try {
 				if (id == null || id.isEmpty() && !daoUsuario.validarLogin(login)) {
 					request.setAttribute("msg", "Login já cadastrado.");
+					request.setAttribute("user", usuario);
 				}
 				if (id == null || id.isEmpty() && daoUsuario.validarLogin(login)) {
 					daoUsuario.salvar(usuario);
