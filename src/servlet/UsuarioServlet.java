@@ -67,10 +67,17 @@ public class UsuarioServlet extends HttpServlet {
 			usuario.setSenha(senha);
 			usuario.setNome(nome);
 
-			if (id == null || id.isEmpty()) {
-				daoUsuario.salvar(usuario);
-			} else {
-				daoUsuario.atualizar(usuario);
+			try {
+				if (id == null || id.isEmpty() && !daoUsuario.validarLogin(login)) {
+					request.setAttribute("msg", "Login já cadastrado.");
+				}
+				if (id == null || id.isEmpty() && daoUsuario.validarLogin(login)) {
+					daoUsuario.salvar(usuario);
+				} else if ( id != null && !id.isEmpty() ) {
+					daoUsuario.atualizar(usuario);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 			redirecionaCadastroUsuario(request, response);
 		}

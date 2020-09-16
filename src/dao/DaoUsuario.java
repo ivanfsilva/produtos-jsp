@@ -90,6 +90,17 @@ public class DaoUsuario {
 		}
 		return null;		
 	}
+	
+	public boolean validarLogin(String login) throws SQLException {
+		String sql = "SELECT COUNT(1) AS qtd FROM usuario WHERE login = '" + login + "'";
+		PreparedStatement stm = connection.prepareStatement(sql);
+		ResultSet rst = stm.executeQuery();
+		
+		if (rst.next()) {
+			return rst.getInt("qtd") <= 0;
+		}
+		return false;		
+	}
 
 	public void atualizar(BeanUsuario usuario) {
 		String sql = "UPDATE usuario SET login = ?, senha = ?, nome = ? WHERE id = " + usuario.getId();
