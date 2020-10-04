@@ -1,6 +1,6 @@
 package beans;
 
-public class ProdutoBean {
+public class BeanProduto {
 
 	private Long id;
 	private String nome;
