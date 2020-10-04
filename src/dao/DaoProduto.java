@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.BeanProduto;
+import beans.BeanUsuario;
 import connection.SingleConnection;
 
 public class DaoProduto {
@@ -18,7 +19,7 @@ public class DaoProduto {
 		connection = SingleConnection.getConnection();
 	}
 	
-	public void Salvar(BeanProduto produto) {
+	public void salvar(BeanProduto produto) {
 		try {
 			String sql = "INSERT INTO produto (nome, valor, quantidade) VALUES (?, ?, ?);";
 			PreparedStatement stm = connection.prepareStatement(sql);
@@ -35,7 +36,7 @@ public class DaoProduto {
 		}
 	}
 	
-	public List<BeanProduto> Listar() throws SQLException {
+	public List<BeanProduto> listar() throws SQLException {
 		List<BeanProduto> listar = new ArrayList<>();
 		
 		String sql = " SELECT * FROM produto ORDER BY nome, id;";
@@ -89,6 +90,39 @@ public class DaoProduto {
 			return produto;
 		}
 		return null;
+	}
+
+	public boolean validarNome(String nome) throws SQLException {
+		String sql = "SELECT COUNT(1) AS qtd FROM produto WHERE nome = '" + nome + "'";
+		PreparedStatement stm = connection.prepareStatement(sql);
+		ResultSet rst = stm.executeQuery();
+		
+		if (rst.next()) {
+			return rst.getInt("qtd") <= 0;
+		}
+		return false;		
+	}
+	
+	public void atualizar(BeanProduto produto) {
+		String sql = "UPDATE produto "
+				+ " SET nome = ?, quantidade = ?, valor = ? "
+				+ " WHERE id = " + produto.getId();
+		
+		try {
+			PreparedStatement stm = connection.prepareStatement(sql);
+			stm.setString(3, produto.getNome());
+			stm.setDouble(1, produto.getQuantidade());
+			stm.setDouble(2, produto.getValor());
+
+			stm.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
 	}
 
 }
