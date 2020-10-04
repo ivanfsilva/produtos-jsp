@@ -9,12 +9,14 @@
 <link rel="stylesheet" href="resources/css/cadastro.css" />
 </head>
 <body>
+	<a href="acessoliberado.jsp">Início</a>
+	<a href="index.jsp">Sair</a>
 	<center>
 		<h1>Cadastro de Produto</h1>
 		<h3 style="color: orange;">${ msg }</h3>
 	</center>
 	
-	<form action="salvarProduto" method="post" id="formUser">
+	<form action="salvarProduto" method="post" id="formUser" onsubmit="return validarCamposProduto();">
 		<ul class="form-style-1">
 			<li>
 				<table>
@@ -95,5 +97,23 @@
 			</tbody>
 		</table>
 	</div>
+	<script type="text/javascript">
+		function validarCamposProduto() {
+			if (document.getElementById("nome").value == '') {
+				alert('Informe o NOME');
+				document.getElementById("nome").focus();
+				return false;
+			} else if (document.getElementById("quantidade").value == '') {
+				alert('Informe a QUANTIDADE');
+				document.getElementById("quantidade").focus();
+				return false;
+			} else if (document.getElementById("valor").value == '') {
+				alert('Informe o VALOR');
+				document.getElementById("valor").focus();
+				return false;
+			}
+			return true;
+		}
+	</script>
 </body>
 </html>

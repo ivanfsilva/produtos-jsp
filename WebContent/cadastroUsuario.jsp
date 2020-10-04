@@ -9,12 +9,14 @@
 <link rel="stylesheet" href="resources/css/cadastro.css" />
 </head>
 <body>
+	<a href="acessoliberado.jsp">Início</a>
+	<a href="index.jsp">Sair</a>
 	<center>
 		<h1>Cadastro de Usuário</h1>
 		<h3 style="color: orange;">${ msg }</h3>
 	</center>
 	
-	<form action="salvarUsuario" method="post" id="formUser" onsubmit="return validarCampos()? true : false;">
+	<form action="salvarUsuario" method="post" id="formUser" onsubmit="return validarCampos();">
 		<ul class="form-style-1">
 			<li>
 				<table>
@@ -25,27 +27,27 @@
 						</td>
 					</tr>
 					<tr>
-						<td>Login:</td>
+						<td>Login: *</td>
 						<td>
-							<input type="text" id="login" name="login" value="${user.login }" />	
+							<input type="text" id="login" name="login" value="${user.login }" required="true" />	
 						</td>
 					</tr>
 					<tr>
-						<td>Senha:</td>
+						<td>Senha: *</td>
 						<td>
-							<input type="password" id="senha" name="senha" value="${user.senha }"/>	
+							<input type="password" id="senha" name="senha" value="${user.senha }" required="true"/>	
 						</td>
 					</tr>
 					<tr>
-						<td>Nome:</td>
+						<td>Nome: *</td>
 						<td>
-							<input type="text" id="nome" name="nome" value="${user.nome }"/>	
+							<input type="text" id="nome" name="nome" value="${user.nome }" required="true"/>	
 						</td>
 					</tr>
 					<tr>
-						<td>Telefone:</td>
+						<td>Telefone: *</td>
 						<td>
-							<input type="text" id="telefone" name="telefone" value="${user.telefone }"/>	
+							<input type="text" id="telefone" name="telefone" value="${user.telefone }" required="true"/>	
 						</td>
 					</tr>
 					<tr>
