@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.BeanProduto;
-import beans.BeanUsuario;
 import connection.SingleConnection;
 
 public class DaoProduto {
@@ -26,6 +25,8 @@ public class DaoProduto {
 			stm.setString(1, produto.getNome());
 			stm.setDouble(2, produto.getValor());
 			stm.setDouble(3, produto.getQuantidade());
+			stm.execute();
+			connection.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			try {
@@ -39,7 +40,7 @@ public class DaoProduto {
 	public List<BeanProduto> listar() throws SQLException {
 		List<BeanProduto> listar = new ArrayList<>();
 		
-		String sql = " SELECT * FROM produto ORDER BY nome, id;";
+		String sql = "SELECT * FROM produto ORDER BY nome, id;";
 		PreparedStatement stm = connection.prepareStatement(sql);
 		ResultSet rst = stm.executeQuery();
 		
@@ -76,7 +77,7 @@ public class DaoProduto {
 	}
 	
 	public BeanProduto consultar(String id) throws SQLException {
-		String sql = "SELECT * FROM usuario WHERE id = " + id;
+		String sql = "SELECT * FROM produto WHERE id = " + id;
 		PreparedStatement stm = connection.prepareStatement(sql);
 		ResultSet rst = stm.executeQuery();
 		

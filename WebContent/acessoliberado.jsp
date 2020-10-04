@@ -16,5 +16,10 @@
 			alt="Cadastro de usuário" title="Cadastro de usuário" 
 			width="50px" height="50px" />
 	</a>
+	<a href="salvarProduto?acao=listartodos">
+		<img src="resources/img/produto.png" 
+			alt="Cadastro de produto" title="Cadastro de produto" 
+			width="50px" height="50px" />
+	</a>
 </body>
 </html>

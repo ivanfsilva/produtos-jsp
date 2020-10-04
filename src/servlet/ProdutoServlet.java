@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.BeanProduto;
-import beans.BeanUsuario;
 import dao.DaoProduto;
 
-@WebServlet("/ProdutoServlet")
+@WebServlet("/salvarProduto")
 public class ProdutoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,19 +27,19 @@ public class ProdutoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String acao = request.getParameter("acao");
-		String user = request.getParameter("user");
+		String id = request.getParameter("id");
 
 		if (acao.equalsIgnoreCase("delete")) {
-			daoProduto.delete(user);
+			daoProduto.delete(id);
 
 			redirecionaCadastroProduto(request, response);
 		} else if (acao.equalsIgnoreCase("editar")) {
 
 			try {
-				BeanProduto produto = daoProduto.consultar(user);
+				BeanProduto produto = daoProduto.consultar(id);
 				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
-				request.setAttribute("user", produto);
-				request.setAttribute("usuarios", daoProduto.listar());
+				request.setAttribute("produto", produto);
+				request.setAttribute("produtos", daoProduto.listar());
 				view.forward(request, response);
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -70,7 +69,7 @@ public class ProdutoServlet extends HttpServlet {
 			produto.setQuantidade(Double.parseDouble(quantidade));
 			try {
 				if (id == null || id.isEmpty() && !daoProduto.validarNome(nome)) {
-					request.setAttribute("msg", "Login já cadastrado.");
+					request.setAttribute("msg", "Nome já cadastrado.");
 					request.setAttribute("produto", produto);
 				}
 				if (id == null || id.isEmpty() && daoProduto.validarNome(nome)) {

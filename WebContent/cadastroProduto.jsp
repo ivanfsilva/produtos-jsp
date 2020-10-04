@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Cadastro de Usuário</title>
+<title>Cadastro de Produto</title>
 <link rel="stylesheet" href="resources/css/cadastro.css" />
 </head>
 <body>
@@ -68,7 +68,7 @@
 			</thead>
 			<caption>Produtos Cadastrados</caption>
 			<tbody>
-				<c:forEach items="${ produtos }" var="user">
+				<c:forEach items="${ produtos }" var="produto">
 					<tr>
 						<td style="width: 150px;">
 							<c:out value="${produto.id}"></c:out>
@@ -83,11 +83,11 @@
 							<c:out value="${produto.valor}"></c:out>
 						</td>
 						<td>
-							<a href="salvarProduto?acao=delete&user=${produto.id}"><img src="resources/img/excluir.png" 
+							<a href="salvarProduto?acao=delete&id=${produto.id}"><img src="resources/img/excluir.png" 
 							alt="Excluir" title="Excluir" width="20px" height="20px" /></a>
 						</td>
 						<td>
-							<a href="salvarProduto?acao=editar&user=${produto.id}"><img src="resources/img/editar.png" 
+							<a href="salvarProduto?acao=editar&id=${produto.id}"><img src="resources/img/editar.png" 
 							alt="Editar" title="Editar" width="20px" height="20px" /></a>
 						</td>
 					</tr>
