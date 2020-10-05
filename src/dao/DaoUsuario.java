@@ -20,12 +20,23 @@ public class DaoUsuario {
 
 	public void salvar(BeanUsuario usuario) {
 		try {
-			String sql = "INSERT INTO usuario (login, senha, nome, telefone) VALUES (?, ?, ?, ?);";
+			String sql = "INSERT INTO usuario (login, senha, nome, telefone, "
+					+ "cep, logradouro, bairro, cidade, uf, ibge) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			
 			PreparedStatement stm = connection.prepareStatement(sql);
 			stm.setString(1, usuario.getLogin());
 			stm.setString(2, usuario.getSenha());
 			stm.setString(3, usuario.getNome());
 			stm.setString(4, usuario.getTelefone());
+			
+			stm.setString(5, usuario.getCep());
+			stm.setString(6, usuario.getLogradouro());
+			stm.setString(7, usuario.getBairro());
+			stm.setString(8, usuario.getCidade());
+			stm.setString(9, usuario.getUf());
+			stm.setString(10, usuario.getIbge());
+			
 			stm.execute();
 			connection.commit();
 		} catch (SQLException e) {
@@ -51,6 +62,13 @@ public class DaoUsuario {
 			beanUsuario.setSenha(rst.getString("senha"));
 			beanUsuario.setNome(rst.getString("nome"));
 			beanUsuario.setTelefone(rst.getString("telefone"));
+			
+			beanUsuario.setCep(rst.getString("cep"));
+			beanUsuario.setLogradouro(rst.getString("logradouro"));
+			beanUsuario.setBairro(rst.getString("bairro"));
+			beanUsuario.setCidade(rst.getString("cidade"));
+			beanUsuario.setUf(rst.getString("uf"));
+			beanUsuario.setIbge(rst.getString("ibge"));
 
 			listar.add(beanUsuario);
 		}
@@ -89,6 +107,13 @@ public class DaoUsuario {
 			beanUsuario.setNome(rst.getString("nome"));
 			beanUsuario.setTelefone(rst.getString("telefone"));
 			
+			beanUsuario.setCep(rst.getString("cep"));
+			beanUsuario.setLogradouro(rst.getString("logradouro"));
+			beanUsuario.setBairro(rst.getString("bairro"));
+			beanUsuario.setCidade(rst.getString("cidade"));
+			beanUsuario.setUf(rst.getString("uf"));
+			beanUsuario.setIbge(rst.getString("ibge"));
+			
 			return beanUsuario;
 		}
 		return null;		
@@ -107,7 +132,9 @@ public class DaoUsuario {
 
 	public void atualizar(BeanUsuario usuario) {
 		String sql = "UPDATE usuario "
-				+ " SET login = ?, senha = ?, nome = ?, telefone = ? "
+				+ " SET login = ?, senha = ?, nome = ?, telefone = ?, "
+				+ " cep = ?, logradouro = ?, bairro = ?, cidade = ?, "
+				+ " uf = ?, ibge = ? "
 				+ " WHERE id = " + usuario.getId();
 		
 		try {
@@ -116,6 +143,14 @@ public class DaoUsuario {
 			stm.setString(2, usuario.getSenha());
 			stm.setString(3, usuario.getNome());
 			stm.setString(4, usuario.getTelefone());
+			
+			stm.setString(5, usuario.getCep());
+			stm.setString(6, usuario.getLogradouro());
+			stm.setString(7, usuario.getBairro());
+			stm.setString(8, usuario.getCidade());
+			stm.setString(9, usuario.getUf());
+			stm.setString(10, usuario.getIbge());
+			
 			stm.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

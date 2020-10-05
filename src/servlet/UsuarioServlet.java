@@ -61,6 +61,13 @@ public class UsuarioServlet extends HttpServlet {
 			String senha = request.getParameter("senha");
 			String nome = request.getParameter("nome");
 			String telefone = request.getParameter("telefone");
+			
+			String cep = request.getParameter("cep");
+			String logradouro = request.getParameter("logradouro");
+			String bairro = request.getParameter("bairro");
+			String cidade = request.getParameter("cidade");
+			String uf = request.getParameter("uf");
+			String ibge = request.getParameter("ibge");
 
 			BeanUsuario usuario = new BeanUsuario();
 			usuario.setId(!id.isEmpty() ? Long.parseLong(id) : null);
@@ -68,6 +75,13 @@ public class UsuarioServlet extends HttpServlet {
 			usuario.setSenha(senha);
 			usuario.setNome(nome);
 			usuario.setTelefone(telefone);
+			
+			usuario.setCep(cep);
+			usuario.setLogradouro(logradouro);
+			usuario.setBairro(bairro);
+			usuario.setCidade(cidade);
+			usuario.setUf(uf);
+			usuario.setIbge(ibge);
 
 			try {
 				if (id == null || id.isEmpty() && !daoUsuario.validarLogin(login)) {

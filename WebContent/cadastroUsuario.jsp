@@ -58,27 +58,27 @@
 					</tr>
 					<tr>
 						<td>Cep:</td>
-						<td><input type="text" id="cep" name="cep"  onblur="consultaCep();"/></td>
+						<td><input type="text" id="cep" name="cep"  onblur="consultaCep();" value="${user.cep }"/></td>
 					</tr>
 					<tr>
 						<td>Logradouro:</td>
-						<td><input type="text" id="logradouro" name="logradouro" /></td>
+						<td><input type="text" id="logradouro" name="logradouro" value="${user.logradouro }" /></td>
 					</tr>
 					<tr>
 						<td>Bairro:</td>
-						<td><input type="text" id="bairro" name="bairro" /></td>
+						<td><input type="text" id="bairro" name="bairro" value="${user.bairro }" /></td>
 					</tr>
 					<tr>
 						<td>Cidade:</td>
-						<td><input type="text" id="cidade" name="cidade" /></td>
+						<td><input type="text" id="cidade" name="cidade" value="${user.cidade }" /></td>
 					</tr>
 					<tr>
 						<td>UF:</td>
-						<td><input type="text" id="uf" name="uf" /></td>
+						<td><input type="text" id="uf" name="uf" value="${user.uf }" /></td>
 					</tr>
 					<tr>
 						<td>IBGE:</td>
-						<td><input type="text" id="ibge" name="ibge" /></td>
+						<td><input type="text" id="ibge" name="ibge" value="${user.ibge }" /></td>
 					</tr>
 					<tr>
 						<td></td>
