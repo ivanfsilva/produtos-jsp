@@ -7,6 +7,12 @@
 <meta charset="ISO-8859-1">
 <title>Cadastro de Usuário</title>
 <link rel="stylesheet" href="resources/css/cadastro.css" />
+<!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous">
+    </script>
+
 </head>
 <body>
 	<a href="acessoliberado.jsp">Início</a>
@@ -49,6 +55,30 @@
 						<td>
 							<input type="text" id="telefone" name="telefone" value="${user.telefone }" required="true"/>	
 						</td>
+					</tr>
+					<tr>
+						<td>Cep:</td>
+						<td><input type="text" id="cep" name="cep"  onblur="consultaCep();"/></td>
+					</tr>
+					<tr>
+						<td>Logradouro:</td>
+						<td><input type="text" id="logradouro" name="logradouro" /></td>
+					</tr>
+					<tr>
+						<td>Bairro:</td>
+						<td><input type="text" id="bairro" name="bairro" /></td>
+					</tr>
+					<tr>
+						<td>Cidade:</td>
+						<td><input type="text" id="cidade" name="cidade" /></td>
+					</tr>
+					<tr>
+						<td>UF:</td>
+						<td><input type="text" id="uf" name="uf" /></td>
+					</tr>
+					<tr>
+						<td>IBGE:</td>
+						<td><input type="text" id="ibge" name="ibge" /></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -120,6 +150,45 @@
 			}			
 		return true;
 		}
+		
+		function consultaCep() {
+			var cep = $("#cep").val();
+
+			//Verifica se campo cep possui valor informado.
+            if (cep != "") {
+
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+
+                //Consulta o webservice viacep.com.br/
+                $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                    if (!("erro" in dados)) {
+                        //Atualiza os campos com os valores da consulta.
+                        $("#logradouro").val(dados.logradouro);
+                        $("#bairro").val(dados.bairro);
+                        $("#cidade").val(dados.localidade);
+                        $("#uf").val(dados.uf);
+                        $("#ibge").val(dados.ibge);
+                    } 
+                    else {
+                        //CEP pesquisado não foi encontrado.
+                        limpa_formulário_cep();
+                        alert("CEP não encontrado.");
+                        
+                    }
+                });
+            }
+		}
+		
+		function limpa_formulário_cep() {
+            // Limpa valores do formulário de cep.
+			$("#logradouro").val('');
+            $("#bairro").val('');
+            $("#cidade").val('');
+            $("#uf").val('');
+            $("#ibge").val('');
+        }
 	</script>
 </body>
 </html>
