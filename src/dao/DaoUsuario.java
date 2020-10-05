@@ -56,19 +56,7 @@ public class DaoUsuario {
 		PreparedStatement stm = connection.prepareStatement(sql);
 		ResultSet rst = stm.executeQuery();
 		while (rst.next()) {
-			BeanUsuario beanUsuario = new BeanUsuario();
-			beanUsuario.setId(rst.getLong("id"));
-			beanUsuario.setLogin(rst.getString("login"));
-			beanUsuario.setSenha(rst.getString("senha"));
-			beanUsuario.setNome(rst.getString("nome"));
-			beanUsuario.setTelefone(rst.getString("telefone"));
-			
-			beanUsuario.setCep(rst.getString("cep"));
-			beanUsuario.setLogradouro(rst.getString("logradouro"));
-			beanUsuario.setBairro(rst.getString("bairro"));
-			beanUsuario.setCidade(rst.getString("cidade"));
-			beanUsuario.setUf(rst.getString("uf"));
-			beanUsuario.setIbge(rst.getString("ibge"));
+			BeanUsuario beanUsuario = popularBeanUsuario(rst);
 
 			listar.add(beanUsuario);
 		}
@@ -100,19 +88,7 @@ public class DaoUsuario {
 		ResultSet rst = stm.executeQuery();
 		
 		if (rst.next()) {
-			BeanUsuario beanUsuario = new BeanUsuario();
-			beanUsuario.setId(rst.getLong("id"));
-			beanUsuario.setLogin(rst.getString("login"));
-			beanUsuario.setSenha(rst.getString("senha"));
-			beanUsuario.setNome(rst.getString("nome"));
-			beanUsuario.setTelefone(rst.getString("telefone"));
-			
-			beanUsuario.setCep(rst.getString("cep"));
-			beanUsuario.setLogradouro(rst.getString("logradouro"));
-			beanUsuario.setBairro(rst.getString("bairro"));
-			beanUsuario.setCidade(rst.getString("cidade"));
-			beanUsuario.setUf(rst.getString("uf"));
-			beanUsuario.setIbge(rst.getString("ibge"));
+			BeanUsuario beanUsuario = popularBeanUsuario(rst);
 			
 			return beanUsuario;
 		}
@@ -160,5 +136,22 @@ public class DaoUsuario {
 				e1.printStackTrace();
 			}
 		}
+	}
+	
+	private BeanUsuario popularBeanUsuario(ResultSet rst) throws SQLException {
+		BeanUsuario beanUsuario = new BeanUsuario();
+		beanUsuario.setId(rst.getLong("id"));
+		beanUsuario.setLogin(rst.getString("login"));
+		beanUsuario.setSenha(rst.getString("senha"));
+		beanUsuario.setNome(rst.getString("nome"));
+		beanUsuario.setTelefone(rst.getString("telefone"));
+		
+		beanUsuario.setCep(rst.getString("cep"));
+		beanUsuario.setLogradouro(rst.getString("logradouro"));
+		beanUsuario.setBairro(rst.getString("bairro"));
+		beanUsuario.setCidade(rst.getString("cidade"));
+		beanUsuario.setUf(rst.getString("uf"));
+		beanUsuario.setIbge(rst.getString("ibge"));
+		return beanUsuario;
 	}
 }
