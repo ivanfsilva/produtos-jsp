@@ -30,6 +30,7 @@ public class UsuarioServlet extends HttpServlet {
 
 		if (acao.equalsIgnoreCase("delete")) {
 			daoUsuario.delete(user);
+			request.setAttribute("msg", "Usuário excluído com sucesso!");
 
 			redirecionaCadastroUsuario(request, response);
 		} else if (acao.equalsIgnoreCase("editar")) {
@@ -90,8 +91,10 @@ public class UsuarioServlet extends HttpServlet {
 				}
 				if (id == null || id.isEmpty() && daoUsuario.validarLogin(login)) {
 					daoUsuario.salvar(usuario);
+					request.setAttribute("msg", "Salvo com sucesso!");
 				} else if ( id != null && !id.isEmpty() ) {
 					daoUsuario.atualizar(usuario);
+					request.setAttribute("msg", "Atualizado com sucesso!");
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

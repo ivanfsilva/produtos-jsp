@@ -53,12 +53,12 @@
 					<tr>
 						<td>Telefone: *</td>
 						<td>
-							<input type="text" id="telefone" name="telefone" value="${user.telefone }" required="true"/>	
+							<input type="text" id="telefone" name="telefone" value="${user.telefone }" required="true" />	
 						</td>
 					</tr>
 					<tr>
 						<td>Cep:</td>
-						<td><input type="text" id="cep" name="cep"  onblur="consultaCep();" value="${user.cep }"/></td>
+						<td><input type="text" id="cep" name="cep"  onblur="consultaCep();" value="${user.cep }" /></td>
 					</tr>
 					<tr>
 						<td>Logradouro:</td>
