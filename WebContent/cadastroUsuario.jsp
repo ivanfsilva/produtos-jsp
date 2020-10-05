@@ -7,11 +7,6 @@
 <meta charset="ISO-8859-1">
 <title>Cadastro de Usuário</title>
 <link rel="stylesheet" href="resources/css/cadastro.css" />
-<!-- Adicionando JQuery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous">
-    </script>
 
 </head>
 <body>
@@ -133,6 +128,9 @@
 			</tbody>
 		</table>
 	</div>
+	<!-- Adicionando JQuery -->
+	<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
+	
 	<script type="text/javascript">
 		function validarCampos() {
 			if (document.getElementById("login").value == '') {
