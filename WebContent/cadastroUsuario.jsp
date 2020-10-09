@@ -96,7 +96,9 @@
 			      <th>LOGIN</th>
 			      <th>NOME</th>
 			      <th>TELEFONE</th>
-			      <th>AÇÃO</th>
+			      <th>Excluir</th>
+			      <th>Editar</th>
+			      <th>Telefones</th>
 			    </tr>
 			</thead>
 			<caption>Usuários Cadastrados</caption>
@@ -116,12 +118,16 @@
 							<c:out value="${user.telefone}"></c:out>
 						</td>
 						<td>
-							<a href="salvarUsuario?acao=delete&user=${user.id}"><img src="resources/img/excluir.png" 
+							<a href="salvarUsuario?acao=delete&user=${user.id}"><img src="resources/img/delete.png" 
 							alt="Excluir" title="Excluir" width="20px" height="20px" /></a>
 						</td>
 						<td>
-							<a href="salvarUsuario?acao=editar&user=${user.id}"><img src="resources/img/editar.png" 
+							<a href="salvarUsuario?acao=editar&user=${user.id}"><img src="resources/img/editar2.png" 
 							alt="Editar" title="Editar" width="20px" height="20px" /></a>
+						</td>
+						<td>
+							<a href="salvarTelefones?acao=addFone&user=${user.id}"><img src="resources/img/phone.png" 
+							alt="Telefones" title="Telefones" width="20px" height="20px" /></a>
 						</td>
 					</tr>
 				</c:forEach>
