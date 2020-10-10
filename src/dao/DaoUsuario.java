@@ -21,8 +21,8 @@ public class DaoUsuario {
 	public void salvar(BeanUsuario usuario) {
 		try {
 			String sql = "INSERT INTO usuario (login, senha, nome, telefone, "
-					+ "cep, logradouro, bairro, cidade, uf, ibge) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+					+ "cep, logradouro, bairro, cidade, uf, ibge, fotobase64, contenttype) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			
 			PreparedStatement stm = connection.prepareStatement(sql);
 			stm.setString(1, usuario.getLogin());
@@ -36,6 +36,9 @@ public class DaoUsuario {
 			stm.setString(8, usuario.getCidade());
 			stm.setString(9, usuario.getUf());
 			stm.setString(10, usuario.getIbge());
+			
+			stm.setString(11, usuario.getFotoBase64());
+			stm.setString(12, usuario.getContentType());
 			
 			stm.execute();
 			connection.commit();
@@ -152,6 +155,10 @@ public class DaoUsuario {
 		beanUsuario.setCidade(rst.getString("cidade"));
 		beanUsuario.setUf(rst.getString("uf"));
 		beanUsuario.setIbge(rst.getString("ibge"));
+		
+		beanUsuario.setFotoBase64(rst.getString("fotoBase64"));
+		beanUsuario.setContentType(rst.getString("contentType"));		
+		
 		return beanUsuario;
 	}
 }

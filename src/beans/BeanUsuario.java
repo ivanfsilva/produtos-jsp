@@ -15,6 +15,10 @@ public class BeanUsuario {
 	private String uf;
 	private String ibge;
 
+	private String fotoBase64;
+	private String contentType;
+	private String tempFotoUser;
+
 	public Long getId() {
 		return id;
 	}
@@ -101,6 +105,33 @@ public class BeanUsuario {
 
 	public void setIbge(String ibge) {
 		this.ibge = ibge;
+	}
+
+	public String getFotoBase64() {
+		return fotoBase64;
+	}
+
+	public void setFotoBase64(String fotoBase64) {
+		this.fotoBase64 = fotoBase64;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+	public String getTempFotoUser() {
+		
+		tempFotoUser = "data:" + contentType + ";base64," + fotoBase64; 
+				
+		return tempFotoUser;
+	}
+
+	public void setTempFotoUser(String tempFotoUser) {
+		this.tempFotoUser = tempFotoUser;
 	}
 
 }

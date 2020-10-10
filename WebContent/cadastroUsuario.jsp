@@ -17,7 +17,8 @@
 		<h3 style="color: orange;">${ msg }</h3>
 	</center>
 	
-	<form action="salvarUsuario" method="post" id="formUser" onsubmit="return validarCampos();">
+	<form action="salvarUsuario" method="post" id="formUser" 
+		onsubmit="return validarCampos();" enctype="multipart/form-data" >
 		<ul class="form-style-1">
 			<li>
 				<table>
@@ -76,6 +77,12 @@
 						<td><input type="text" id="ibge" name="ibge" value="${user.ibge }" /></td>
 					</tr>
 					<tr>
+						<td>
+							Foto:
+						</td>
+						<td><input type="file" name="foto" value="foto" /></td>
+					</tr>
+					<tr>
 						<td></td>
 						<td>
 							<input type="submit" value="Salvar" />
@@ -92,7 +99,8 @@
 		<table class="responsive-table">
 			<thead>
 			    <tr>
-			      <th>ID</th>
+			      <th>ID</th>    
+			      <th>FOTO</th>
 			      <th>LOGIN</th>
 			      <th>NOME</th>
 			      <th>TELEFONE</th>
@@ -107,6 +115,12 @@
 					<tr>
 						<td style="width: 150px;">
 							<c:out value="${user.id}"></c:out>
+						</td>
+						<td style="width: 150px;">
+							<a href="salvarUsuario?acao=download&user=${user.id}">
+								<img src='<c:out value="${ user.tempFotoUser }"></c:out>' 
+								width="32px" height="32px" />
+							</a>
 						</td>
 						<td style="width: 150px;">
 							<c:out value="${user.login}"></c:out>
