@@ -65,14 +65,28 @@ public class UsuarioServlet extends HttpServlet {
 			try {
 				BeanUsuario usuario = daoUsuario.consultar(user);
 				if (usuario != null) {
+					String contentType = "";
+					byte[] fileBytes = null;
+					String tipo = request.getParameter("tipo");
+					
+					if (tipo.equalsIgnoreCase("imagem")) {
+						contentType = usuario.getContentType();
+						/* Converte a base64 da imagem do banco para byte[] */
+						fileBytes = new Base64().decodeBase64(usuario.getFotoBase64());
+					} else if (tipo.equalsIgnoreCase("curriculo")) {
+						/* Converte a base64 da imagem do banco para byte[] */
+						contentType = usuario.getContentTypeCurriculo();
+						fileBytes = new Base64().decodeBase64(usuario.getCurriculoBase64());
+					}
+					
 					response.setHeader("content-Disposition", 
 							"attachment;filename=arquivo." + 
-					usuario.getContentType().split("\\/")[1]);
+					contentType.split("\\/")[1]);
 					
 					/* Converte a base64 da imagem do banco para byte[] */
-					byte[] imageFotoByte = new Base64().decodeBase64(usuario.getFotoBase64());
+					//fileBytes = new Base64().decodeBase64(usuario.getFotoBase64());
 					/* Coloca os bytes em um objeto de entrada para processar */
-					InputStream is = new ByteArrayInputStream(imageFotoByte);
+					InputStream is = new ByteArrayInputStream(fileBytes);
 					/* Inicio da resposta para o navegador */
 					int read = 0;
 					byte[] bytes = new byte[1024];
@@ -134,16 +148,26 @@ public class UsuarioServlet extends HttpServlet {
 
 				    Part imagemFoto = request.getPart("foto");
 
-				    if (imagemFoto != null && imagemFoto.getInputStream().available() > 0) {
+			    	if (imagemFoto != null && imagemFoto.getInputStream().available() > 0) {
 
 				        String fotoBase64 = Base64.encodeBase64String(converteStremParaByte(imagemFoto.getInputStream()));
 
-					usuario.setFotoBase64(fotoBase64);
-					usuario.setContentType(imagemFoto.getContentType());
-				//	usuario.setFotoBase64Miniatura(criarMiniaturaImagem(fotoBase64));
+				        usuario.setFotoBase64(fotoBase64);
+				        usuario.setContentType(imagemFoto.getContentType());
+				        //	usuario.setFotoBase64Miniatura(criarMiniaturaImagem(fotoBase64));
 				    } else {
-				//	usuario.setAtualizarImagem(Boolean.FALSE);
+				    	//	usuario.setAtualizarImagem(Boolean.FALSE);
 				    }
+			    	
+			    	// Processa PDF
+			    	
+			    	Part curriculoPdf = request.getPart("curriculo");
+			    	if (curriculoPdf != null) {
+			    		String curriculoBase64 = Base64.encodeBase64String(converteStremParaByte(curriculoPdf.getInputStream()));
+			    		usuario.setCurriculoBase64(curriculoBase64);
+				        usuario.setContentTypeCurriculo(curriculoPdf.getContentType());
+			    	}
+				    
 				}
 				
 				/* Fim File upload de imagens e pdf */

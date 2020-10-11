@@ -80,7 +80,13 @@
 						<td>
 							Foto:
 						</td>
-						<td><input type="file" name="foto" value="foto" /></td>
+						<td><input type="file" id="foto" name="foto" value="foto" /></td>
+					</tr>
+					<tr>
+						<td>
+							Curriculo:
+						</td>
+						<td><input type="file" id="curriculo" name="curriculo" value="curriculo" accept="application/pdf" /></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -101,6 +107,7 @@
 			    <tr>
 			      <th>ID</th>    
 			      <th>FOTO</th>
+			      <th>CURRICULO</th>
 			      <th>LOGIN</th>
 			      <th>NOME</th>
 			      <th>TELEFONE</th>
@@ -117,9 +124,14 @@
 							<c:out value="${user.id}"></c:out>
 						</td>
 						<td style="width: 150px;">
-							<a href="salvarUsuario?acao=download&user=${user.id}">
+							<a href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}">
 								<img src='<c:out value="${ user.tempFotoUser }"></c:out>' 
 								width="32px" height="32px" />
+							</a>
+						</td>
+						<td style="width: 150px;">
+							<a href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}">
+								Currículo
 							</a>
 						</td>
 						<td style="width: 150px;">

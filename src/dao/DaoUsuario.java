@@ -21,8 +21,9 @@ public class DaoUsuario {
 	public void salvar(BeanUsuario usuario) {
 		try {
 			String sql = "INSERT INTO usuario (login, senha, nome, telefone, "
-					+ "cep, logradouro, bairro, cidade, uf, ibge, fotobase64, contenttype) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+					+ "cep, logradouro, bairro, cidade, uf, ibge, fotobase64, contenttype, "
+					+ "curriculobase64, contenttypecurriculo) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			
 			PreparedStatement stm = connection.prepareStatement(sql);
 			stm.setString(1, usuario.getLogin());
@@ -39,6 +40,8 @@ public class DaoUsuario {
 			
 			stm.setString(11, usuario.getFotoBase64());
 			stm.setString(12, usuario.getContentType());
+			stm.setString(13, usuario.getCurriculoBase64());
+			stm.setString(14, usuario.getContentTypeCurriculo());
 			
 			stm.execute();
 			connection.commit();
@@ -158,6 +161,10 @@ public class DaoUsuario {
 		
 		beanUsuario.setFotoBase64(rst.getString("fotoBase64"));
 		beanUsuario.setContentType(rst.getString("contentType"));		
+		beanUsuario.setCurriculoBase64(rst.getString("curriculobase64"));
+		beanUsuario.setContentTypeCurriculo(rst.getString("contenttypecurriculo"));	
+		
+		// curriculobase64, contenttypecurriculo
 		
 		return beanUsuario;
 	}
