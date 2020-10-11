@@ -80,13 +80,19 @@
 						<td>
 							Foto:
 						</td>
-						<td><input type="file" id="foto" name="foto" value="foto" /></td>
+						<td><input type="file" id="foto" name="foto"/>
+							<input style="display: none;" type="text" name="fotoTemp" value="${ user.fotoBase64 }" />
+							<input style="display: none;" type="text" name="contenttypeTemp" value="${ user.contentType }" />
+						</td>
 					</tr>
 					<tr>
 						<td>
 							Curriculo:
 						</td>
-						<td><input type="file" id="curriculo" name="curriculo" value="curriculo" accept="application/pdf" /></td>
+						<td><input type="file" id="curriculo" name="curriculo" />
+							<input style="display: none;" type="text" id="curriculoTemp" name="curriculoTemp" value="${ user.curriculoBase64 }" accept="application/pdf" />
+							<input style="display: none;" type="text" name="contenttypecurriculoTemp" value="${ user.contentTypeCurriculo }" />
+						</td>
 					</tr>
 					<tr>
 						<td></td>

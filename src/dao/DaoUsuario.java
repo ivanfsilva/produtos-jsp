@@ -113,10 +113,12 @@ public class DaoUsuario {
 	}
 
 	public void atualizar(BeanUsuario usuario) {
+		
 		String sql = "UPDATE usuario "
 				+ " SET login = ?, senha = ?, nome = ?, telefone = ?, "
 				+ " cep = ?, logradouro = ?, bairro = ?, cidade = ?, "
-				+ " uf = ?, ibge = ? "
+				+ " uf = ?, ibge = ?, fotobase64 = ?, contenttype = ?, "
+				+ " curriculobase64 = ?, contenttypecurriculo = ? "
 				+ " WHERE id = " + usuario.getId();
 		
 		try {
@@ -132,6 +134,11 @@ public class DaoUsuario {
 			stm.setString(8, usuario.getCidade());
 			stm.setString(9, usuario.getUf());
 			stm.setString(10, usuario.getIbge());
+			
+			stm.setString(11, usuario.getFotoBase64());
+			stm.setString(12, usuario.getContentType());
+			stm.setString(13, usuario.getCurriculoBase64());
+			stm.setString(14, usuario.getContentTypeCurriculo());
 			
 			stm.executeUpdate();
 		} catch (SQLException e) {
@@ -163,8 +170,6 @@ public class DaoUsuario {
 		beanUsuario.setContentType(rst.getString("contentType"));		
 		beanUsuario.setCurriculoBase64(rst.getString("curriculobase64"));
 		beanUsuario.setContentTypeCurriculo(rst.getString("contenttypecurriculo"));	
-		
-		// curriculobase64, contenttypecurriculo
 		
 		return beanUsuario;
 	}
