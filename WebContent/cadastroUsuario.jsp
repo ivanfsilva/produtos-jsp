@@ -1,6 +1,7 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,12 +45,6 @@
 						<td>Nome: *</td>
 						<td>
 							<input type="text" id="nome" name="nome" value="${user.nome }" required="true"/>	
-						</td>
-					</tr>
-					<tr>
-						<td>Telefone: *</td>
-						<td>
-							<input type="text" id="telefone" name="telefone" value="${user.telefone }" required="true" />	
 						</td>
 					</tr>
 					<tr>
@@ -116,7 +111,6 @@
 			      <th>CURRICULO</th>
 			      <th>LOGIN</th>
 			      <th>NOME</th>
-			      <th>TELEFONE</th>
 			      <th>Excluir</th>
 			      <th>Editar</th>
 			      <th>Telefones</th>
@@ -129,25 +123,39 @@
 						<td style="width: 150px;">
 							<c:out value="${user.id}"></c:out>
 						</td>
-						<td style="width: 150px;">
-							<a href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}">
-								<img src='<c:out value="${ user.tempFotoUser }"></c:out>' 
-								width="32px" height="32px" />
-							</a>
-						</td>
-						<td style="width: 150px;">
-							<a href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}">
-								Currículo
-							</a>
-						</td>
+	
+						<c:if test="${user.fotoBase64.isEmpty() == false}">
+						  <td style="width: 150px;">
+						  	<a href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}">
+						  		<img src='<c:out value="${user.tempFotoUser}"/>' width="32px" height="32px" /> 
+						  	</a>
+						  </td>
+						</c:if>	
+						<c:if test="${user.fotoBase64.isEmpty() == true || user.fotoBase64 == null}">
+						  <td>
+						  	<img alt="NÃO TEM FOTO" src="resources/img/usuarioPadrao.png" 
+						  		width="32px" height="32px" onclick="alert('Não possui imagem')"> 
+						  </td>
+						</c:if>	
+
+						<c:if test="${user.curriculoBase64.isEmpty() == false}">	
+							<td style="width: 150px;">
+								<a href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}">
+									<img alt="Curriculo" src="resources/img/pdf.png" width="32px" height="32px"> 
+								</a></td>
+						</c:if>
+						<c:if test="${user.curriculoBase64.isEmpty() == true || user.curriculoBase64 == null}">	
+						 	<td>
+						 		<img alt="Curriculo" src="resources/img/pdf.png" 
+						 			width="32px" height="32px" onclick="alert('Não possui currículo')">
+						 	</td>
+						</c:if>
+					
 						<td style="width: 150px;">
 							<c:out value="${user.login}"></c:out>
 						</td>
 						<td>
 							<c:out value="${user.nome}"></c:out>
-						</td>
-						<td>
-							<c:out value="${user.telefone}"></c:out>
 						</td>
 						<td>
 							<a href="salvarUsuario?acao=delete&user=${user.id}"><img src="resources/img/delete.png" 
@@ -179,9 +187,6 @@
 					return false;
 			} else if (document.getElementById("nome").value == '') {
 				alert('Informe o NOME');
-				return false;
-			} else if (document.getElementById("telefone").value == '') {
-				alert('Informe o TELEFONE');
 				return false;
 			}			
 		return true;

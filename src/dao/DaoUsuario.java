@@ -20,28 +20,27 @@ public class DaoUsuario {
 
 	public void salvar(BeanUsuario usuario) {
 		try {
-			String sql = "INSERT INTO usuario (login, senha, nome, telefone, "
+			String sql = "INSERT INTO usuario (login, senha, nome, "
 					+ "cep, logradouro, bairro, cidade, uf, ibge, fotobase64, contenttype, "
 					+ "curriculobase64, contenttypecurriculo) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			
 			PreparedStatement stm = connection.prepareStatement(sql);
 			stm.setString(1, usuario.getLogin());
 			stm.setString(2, usuario.getSenha());
 			stm.setString(3, usuario.getNome());
-			stm.setString(4, usuario.getTelefone());
 			
-			stm.setString(5, usuario.getCep());
-			stm.setString(6, usuario.getLogradouro());
-			stm.setString(7, usuario.getBairro());
-			stm.setString(8, usuario.getCidade());
-			stm.setString(9, usuario.getUf());
-			stm.setString(10, usuario.getIbge());
+			stm.setString(4, usuario.getCep());
+			stm.setString(5, usuario.getLogradouro());
+			stm.setString(6, usuario.getBairro());
+			stm.setString(7, usuario.getCidade());
+			stm.setString(8, usuario.getUf());
+			stm.setString(9, usuario.getIbge());
 			
-			stm.setString(11, usuario.getFotoBase64());
-			stm.setString(12, usuario.getContentType());
-			stm.setString(13, usuario.getCurriculoBase64());
-			stm.setString(14, usuario.getContentTypeCurriculo());
+			stm.setString(10, usuario.getFotoBase64());
+			stm.setString(11, usuario.getContentType());
+			stm.setString(12, usuario.getCurriculoBase64());
+			stm.setString(13, usuario.getContentTypeCurriculo());
 			
 			stm.execute();
 			connection.commit();
@@ -115,7 +114,7 @@ public class DaoUsuario {
 	public void atualizar(BeanUsuario usuario) {
 		
 		String sql = "UPDATE usuario "
-				+ " SET login = ?, senha = ?, nome = ?, telefone = ?, "
+				+ " SET login = ?, senha = ?, nome = ?, "
 				+ " cep = ?, logradouro = ?, bairro = ?, cidade = ?, "
 				+ " uf = ?, ibge = ?, fotobase64 = ?, contenttype = ?, "
 				+ " curriculobase64 = ?, contenttypecurriculo = ? "
@@ -126,19 +125,18 @@ public class DaoUsuario {
 			stm.setString(1, usuario.getLogin());
 			stm.setString(2, usuario.getSenha());
 			stm.setString(3, usuario.getNome());
-			stm.setString(4, usuario.getTelefone());
 			
-			stm.setString(5, usuario.getCep());
-			stm.setString(6, usuario.getLogradouro());
-			stm.setString(7, usuario.getBairro());
-			stm.setString(8, usuario.getCidade());
-			stm.setString(9, usuario.getUf());
-			stm.setString(10, usuario.getIbge());
+			stm.setString(4, usuario.getCep());
+			stm.setString(5, usuario.getLogradouro());
+			stm.setString(6, usuario.getBairro());
+			stm.setString(7, usuario.getCidade());
+			stm.setString(8, usuario.getUf());
+			stm.setString(9, usuario.getIbge());
 			
-			stm.setString(11, usuario.getFotoBase64());
-			stm.setString(12, usuario.getContentType());
-			stm.setString(13, usuario.getCurriculoBase64());
-			stm.setString(14, usuario.getContentTypeCurriculo());
+			stm.setString(10, usuario.getFotoBase64());
+			stm.setString(11, usuario.getContentType());
+			stm.setString(12, usuario.getCurriculoBase64());
+			stm.setString(13, usuario.getContentTypeCurriculo());
 			
 			stm.executeUpdate();
 		} catch (SQLException e) {
@@ -157,7 +155,6 @@ public class DaoUsuario {
 		beanUsuario.setLogin(rst.getString("login"));
 		beanUsuario.setSenha(rst.getString("senha"));
 		beanUsuario.setNome(rst.getString("nome"));
-		beanUsuario.setTelefone(rst.getString("telefone"));
 		
 		beanUsuario.setCep(rst.getString("cep"));
 		beanUsuario.setLogradouro(rst.getString("logradouro"));

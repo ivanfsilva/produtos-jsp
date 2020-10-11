@@ -131,7 +131,6 @@ public class UsuarioServlet extends HttpServlet {
 			usuario.setLogin(login);
 			usuario.setSenha(senha);
 			usuario.setNome(nome);
-			usuario.setTelefone(telefone);
 			
 			usuario.setCep(cep);
 			usuario.setLogradouro(logradouro);
