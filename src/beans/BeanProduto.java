@@ -38,5 +38,9 @@ public class BeanProduto {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
+	
+	public String getValorEmTexto() {
+		return Double.toString(valor).replace('.', ',');
+	}
 
 }

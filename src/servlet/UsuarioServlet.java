@@ -43,12 +43,12 @@ public class UsuarioServlet extends HttpServlet {
 		String acao = request.getParameter("acao");
 		String user = request.getParameter("user");
 
-		if (acao.equalsIgnoreCase("delete")) {
+		if (acao != null && acao.equalsIgnoreCase("delete")) {
 			daoUsuario.delete(user);
 			request.setAttribute("msg", "Usuário excluído com sucesso!");
 
 			redirecionaCadastroUsuario(request, response);
-		} else if (acao.equalsIgnoreCase("editar")) {
+		} else if (acao != null && acao.equalsIgnoreCase("editar")) {
 
 			try {
 				BeanUsuario usuario = daoUsuario.consultar(user);
@@ -59,9 +59,9 @@ public class UsuarioServlet extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		} else if (acao.equalsIgnoreCase("listartodos")) {
+		} else if (acao != null && acao.equalsIgnoreCase("listartodos")) {
 			redirecionaCadastroUsuario(request, response);
-		} else if (acao.equalsIgnoreCase("download")) {
+		} else if (acao != null && acao.equalsIgnoreCase("download")) {
 			try {
 				BeanUsuario usuario = daoUsuario.consultar(user);
 				if (usuario != null) {
@@ -102,6 +102,8 @@ public class UsuarioServlet extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		} else {
+			// colar redirect para a mesma tela 
 		}
 	}
 

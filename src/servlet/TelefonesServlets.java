@@ -40,7 +40,7 @@ public class TelefonesServlets extends HttpServlet {
 				
 				RequestDispatcher view = request.getRequestDispatcher("/telefones.jsp");
 				request.setAttribute("telefones", daoTelefone.listar(usuario.getId()));
-				request.setAttribute("msg", "Salvo com sucesso");
+				//request.setAttribute("msg", "Salvo com sucesso");
 				// request.setAttribute("userId", user);
 				view.forward(request, response);
 			} else if (acao.endsWith("deleteFone")) {
@@ -71,9 +71,28 @@ public class TelefonesServlets extends HttpServlet {
 		String numero = request.getParameter("numero");
 		String tipo = request.getParameter("tipo");
 		
-		//System.out.println(usuario.getId());
-		//System.out.println(numero);
-		//System.out.println(tipo);
+		String acao = request.getParameter("acao");
+		
+		if (acao == null || (acao != null && acao.equalsIgnoreCase("voltar"))) {
+			RequestDispatcher view = request.getRequestDispatcher("/cadastroUsuario.jsp");
+			try {
+				request.setAttribute("usuarios", daoUsuario.listar());
+				view.forward(request, response);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if (numero == null || (numero != null && numero.isEmpty())) {
+			RequestDispatcher view = request.getRequestDispatcher("/telefones.jsp");
+			try {
+				request.setAttribute("telefones", daoTelefone.listar(usuario.getId()));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("msg", "Informe o número do telefone");
+			view.forward(request, response);
+		}
 		
 		BeanTelefone telefone = new BeanTelefone();
 		telefone.setNumero(numero);
@@ -89,7 +108,6 @@ public class TelefonesServlets extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("msg", "Salvo com sucesso");
-		// request.setAttribute("userId", user);
 		view.forward(request, response);
 	}
 

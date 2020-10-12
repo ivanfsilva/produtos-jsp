@@ -65,7 +65,12 @@ public class ProdutoServlet extends HttpServlet {
 			BeanProduto produto = new BeanProduto();
 			produto.setId(!id.isEmpty() ? Long.parseLong(id) : null);
 			produto.setNome(nome);
-			produto.setValor(Double.parseDouble(valor));
+			if (valor != null && !valor.isEmpty()) {
+				String valorParse = valor.replaceAll("\\.", "");// 10500,20
+				valorParse = valorParse.replaceAll("\\,", ".");//10500.20
+				
+				produto.setValor(Double.parseDouble(valorParse));
+			}
 			produto.setQuantidade(Double.parseDouble(quantidade));
 			try {
 				if (id == null || id.isEmpty() && !daoProduto.validarNome(nome)) {

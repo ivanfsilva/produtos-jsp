@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -41,7 +42,8 @@
 					<tr>
 						<td>Valor:</td>
 						<td>
-							<input type="text" id="valor" name="valor" value="${produto.valor }"/>	
+							<input type="text" id="valor" name="valor" 
+							data-thousands="." data-decimal="," value="${produto.valorEmTexto } "/>	
 						</td>
 					</tr>
 					<tr>
@@ -82,7 +84,7 @@
 							<c:out value="${produto.quantidade}"></c:out>
 						</td>
 						<td>
-							<c:out value="${produto.valor}"></c:out>
+							<fmt:formatNumber type="number" maxFractionDigits="2" value="${ produto.valor }"/>
 						</td>
 						<td>
 							<a href="salvarProduto?acao=delete&id=${produto.id}"><img src="resources/img/excluir.png" 
@@ -97,6 +99,8 @@
 			</tbody>
 		</table>
 	</div>
+	<script type="text/javascript" src="resources/js/jquery.min.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.maskMoney.min.js"></script>
 	<script type="text/javascript">
 		function validarCamposProduto() {
 			if (document.getElementById("nome").value == '') {
@@ -115,5 +119,11 @@
 			return true;
 		}
 	</script>
+	<script type="text/javascript">
+	  $(function() {
+	    $('#valor').maskMoney();
+	  })
+	</script>
+	
 </body>
 </html>
