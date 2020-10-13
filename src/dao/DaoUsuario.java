@@ -210,6 +210,7 @@ public class DaoUsuario {
 		beanUsuario.setContentType(rst.getString("contentType"));		
 		beanUsuario.setCurriculoBase64(rst.getString("curriculobase64"));
 		beanUsuario.setContentTypeCurriculo(rst.getString("contenttypecurriculo"));	
+		beanUsuario.setAtivo(rst.getBoolean("ativo"));
 		
 		return beanUsuario;
 	}
