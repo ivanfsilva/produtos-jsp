@@ -187,8 +187,7 @@ public class UsuarioServlet extends HttpServlet {
 				        
 				        usuario.setFotoBase64Miniatura(miniaturaBase64);
 				    } else {
-				    	usuario.setFotoBase64(request.getParameter("fotoTemp"));
-				        usuario.setContentType(request.getParameter("contenttypeTemp"));
+				    	usuario.setAtualizarImage(false);
 				    }
 			    	
 			    	// Processa PDF
@@ -199,8 +198,7 @@ public class UsuarioServlet extends HttpServlet {
 			    		usuario.setCurriculoBase64(curriculoBase64);
 				        usuario.setContentTypeCurriculo(curriculoPdf.getContentType());
 			    	} else {
-			    		usuario.setCurriculoBase64(request.getParameter("curriculoTemp"));
-				        usuario.setContentTypeCurriculo(request.getParameter("contenttypecurriculoTemp"));
+			    		usuario.setAtualizarPdf(false);
 			    	}
 				    
 				}

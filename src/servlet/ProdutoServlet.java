@@ -26,7 +26,7 @@ public class ProdutoServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String acao = request.getParameter("acao");
+		String acao = request.getParameter("acao") != null ? request.getParameter("acao") : "listartodos";
 		String id = request.getParameter("id");
 
 		if (acao.equalsIgnoreCase("delete")) {

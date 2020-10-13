@@ -76,8 +76,7 @@
 							Foto:
 						</td>
 						<td><input type="file" id="foto" name="foto"/>
-							<input style="display: none;" type="text" name="fotoTemp" value="${ user.fotoBase64Miniatura }" />
-							<input style="display: none;" type="text" name="contenttypeTemp" value="${ user.contentType }" />
+							
 						</td>
 					</tr>
 					<tr>
@@ -85,8 +84,7 @@
 							Curriculo:
 						</td>
 						<td><input type="file" id="curriculo" name="curriculo" />
-							<input style="display: none;" type="text" id="curriculoTemp" name="curriculoTemp" value="${ user.curriculoBase64 }" accept="application/pdf" />
-							<input style="display: none;" type="text" name="contenttypecurriculoTemp" value="${ user.contentTypeCurriculo }" />
+							
 						</td>
 					</tr>
 					<tr>

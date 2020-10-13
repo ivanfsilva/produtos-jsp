@@ -21,6 +21,9 @@ public class BeanUsuario {
 	private String contentTypeCurriculo;
 	private String tempFotoUser;
 
+	private boolean atualizarImage = true;
+	private boolean atualizarPdf = true;
+
 	public Long getId() {
 		return id;
 	}
@@ -150,6 +153,22 @@ public class BeanUsuario {
 
 	public void setContentTypeCurriculo(String contentTypeCurriculo) {
 		this.contentTypeCurriculo = contentTypeCurriculo;
+	}
+
+	public boolean isAtualizarImage() {
+		return atualizarImage;
+	}
+
+	public void setAtualizarImage(boolean atualizarImage) {
+		this.atualizarImage = atualizarImage;
+	}
+
+	public boolean isAtualizarPdf() {
+		return atualizarPdf;
+	}
+
+	public void setAtualizarPdf(boolean atualizarPdf) {
+		this.atualizarPdf = atualizarPdf;
 	}
 
 }
