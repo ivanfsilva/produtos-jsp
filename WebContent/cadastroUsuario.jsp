@@ -72,6 +72,11 @@
 						<td><input type="text" id="ibge" name="ibge" value="${user.ibge }" /></td>
 					</tr>
 					<tr>
+						<td>Ativo:</td>
+						<td><input type="checkbox" id="ativo" name="ativo"></td>
+					</tr>
+					
+					<tr>
 						<td>
 							Foto:
 						</td>

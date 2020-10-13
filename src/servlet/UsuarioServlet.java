@@ -144,6 +144,13 @@ public class UsuarioServlet extends HttpServlet {
 			usuario.setCidade(cidade);
 			usuario.setUf(uf);
 			usuario.setIbge(ibge);
+			
+			if (request.getParameter("ativo") != null 
+					&& request.getParameter("ativo").equalsIgnoreCase("on")){
+				usuario.setAtivo(true);
+			}else {
+				usuario.setAtivo(false);
+			}
 
 			try {
 				
