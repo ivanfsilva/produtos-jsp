@@ -58,7 +58,7 @@ public class DaoUsuario {
 	public List<BeanUsuario> listar() throws SQLException {
 		List<BeanUsuario> listar = new ArrayList<>();
 
-		String sql = "SELECT * FROM usuario ORDER BY nome, id;";
+		String sql = "SELECT * FROM usuario WHERE login <> 'adm' ORDER BY nome, id;";
 		PreparedStatement stm = connection.prepareStatement(sql);
 		ResultSet rst = stm.executeQuery();
 		while (rst.next()) {
@@ -70,7 +70,7 @@ public class DaoUsuario {
 	}
 	
 	public void delete(String id) {
-		String sql = "DELETE FROM usuario WHERE id = '" + id + "'";
+		String sql = "DELETE FROM usuario WHERE id = '" + id + "' AND login <> 'adm'";
 		
 		try {
 			PreparedStatement stm;
@@ -89,7 +89,7 @@ public class DaoUsuario {
 	}
 
 	public BeanUsuario consultar(String id) throws SQLException {
-		String sql = "SELECT * FROM usuario WHERE id = " + id;
+		String sql = "SELECT * FROM usuario WHERE id = " + id+ "' AND login <> 'adm'";
 		PreparedStatement stm = connection.prepareStatement(sql);
 		ResultSet rst = stm.executeQuery();
 		
