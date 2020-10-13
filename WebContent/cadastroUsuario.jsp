@@ -76,7 +76,7 @@
 							Foto:
 						</td>
 						<td><input type="file" id="foto" name="foto"/>
-							<input style="display: none;" type="text" name="fotoTemp" value="${ user.fotoBase64 }" />
+							<input style="display: none;" type="text" name="fotoTemp" value="${ user.fotoBase64Miniatura }" />
 							<input style="display: none;" type="text" name="contenttypeTemp" value="${ user.contentType }" />
 						</td>
 					</tr>
@@ -124,14 +124,14 @@
 							<c:out value="${user.id}"></c:out>
 						</td>
 	
-						<c:if test="${user.fotoBase64.isEmpty() == false}">
+						<c:if test="${user.fotoBase64Miniatura.isEmpty() == false}">
 						  <td style="width: 150px;">
 						  	<a href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}">
-						  		<img src='<c:out value="${user.tempFotoUser}"/>' width="32px" height="32px" /> 
+						  		<img src='<c:out value="${user.fotoBase64Miniatura}"/>' width="32px" height="32px" /> 
 						  	</a>
 						  </td>
 						</c:if>	
-						<c:if test="${user.fotoBase64.isEmpty() == true || user.fotoBase64 == null}">
+						<c:if test="${user.fotoBase64Miniatura.isEmpty() == true || user.fotoBase64Miniatura == null}">
 						  <td>
 						  	<img alt="NÃO TEM FOTO" src="resources/img/usuarioPadrao.png" 
 						  		width="32px" height="32px" onclick="alert('Não possui imagem')"> 
