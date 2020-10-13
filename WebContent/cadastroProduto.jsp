@@ -36,7 +36,8 @@
 					<tr>
 						<td>Quantidade:</td>
 						<td>
-							<input type="text" id="quantidade" name="quantidade" value="${produto.quantidade }"/>	
+							<input type="text" id="quantidade" name="quantidade" value="${produto.quantidade }" 
+								onkeypress="$(this).mask('000')" maxlength="6"/>	
 						</td>
 					</tr>
 					<tr>
@@ -87,7 +88,7 @@
 							<fmt:formatNumber type="number" maxFractionDigits="2" value="${ produto.valor }"/>
 						</td>
 						<td>
-							<a href="salvarProduto?acao=delete&id=${produto.id}"><img src="resources/img/excluir.png" 
+							<a href="salvarProduto?acao=delete&id=${produto.id}" onclick="return confirm('Confirma a exclusão?')"><img src="resources/img/excluir.png" 
 							alt="Excluir" title="Excluir" width="20px" height="20px" /></a>
 						</td>
 						<td>
@@ -111,6 +112,9 @@
 				alert('Informe a QUANTIDADE');
 				document.getElementById("quantidade").focus();
 				return false;
+			} else if(document.getElementById("quantidade").value > 9999999){
+				alert('Quantidade não permitida, máximo 9999999');
+				return false;
 			} else if (document.getElementById("valor").value == '') {
 				alert('Informe o VALOR');
 				document.getElementById("valor").focus();
@@ -122,7 +126,13 @@
 	<script type="text/javascript">
 	  $(function() {
 	    $('#valor').maskMoney();
-	  })
+	  });
+	  
+	  $(document).ready(function() {
+		  $("#quantidade").keyup(function() {
+		      $("#quantidade").val(this.value.match(/[0-9]*/));
+		  });
+		});
 	</script>
 	
 </body>

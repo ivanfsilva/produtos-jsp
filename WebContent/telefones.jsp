@@ -90,7 +90,7 @@
 						</td>
 						
 						<td>
-							<a href="salvarTelefones?acao=deleteFone&foneId=${fone.id}"><img src="resources/img/delete.png" 
+							<a href="salvarTelefones?acao=deleteFone&foneId=${fone.id}" onclick="return confirm('Confirma a exclusão?')"><img src="resources/img/delete.png" 
 							alt="Excluir" title="Excluir" width="20px" height="20px" /></a>
 						</td>
 						
