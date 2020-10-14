@@ -40,6 +40,7 @@ public class ProdutoServlet extends HttpServlet {
 				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produto", produto);
 				request.setAttribute("produtos", daoProduto.listar());
+				request.setAttribute("categorias", daoProduto.listaCategorias());
 				view.forward(request, response);
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -94,6 +95,7 @@ public class ProdutoServlet extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
 		try {
 			request.setAttribute("produtos", daoProduto.listar());
+			request.setAttribute("categorias", daoProduto.listaCategorias());
 			view.forward(request, response);
 		} catch (SQLException e) {
 			e.printStackTrace();
