@@ -107,7 +107,7 @@ public class DaoProduto {
 			produto.setNome(rst.getString("nome"));
 			produto.setQuantidade(rst.getDouble("quantidade"));
 			produto.setValor(rst.getDouble("valor"));
-			produto.setCategoria_id(rst.getLong("categoria_id");
+			produto.setCategoria_id(rst.getLong("categoria_id"));
 			
 			return produto;
 		}
