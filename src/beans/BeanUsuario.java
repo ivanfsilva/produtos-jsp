@@ -21,6 +21,7 @@ public class BeanUsuario {
 	private String contentTypeCurriculo;
 	private String tempFotoUser;
 	private boolean ativo;
+	private String sexo;
 
 	private boolean atualizarImage = true;
 	private boolean atualizarPdf = true;
@@ -166,6 +167,14 @@ public class BeanUsuario {
 
 	public boolean isAtualizarPdf() {
 		return atualizarPdf;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 
 	public void setAtualizarPdf(boolean atualizarPdf) {
