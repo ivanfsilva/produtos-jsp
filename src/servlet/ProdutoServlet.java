@@ -21,7 +21,6 @@ public class ProdutoServlet extends HttpServlet {
        
     public ProdutoServlet() {
         super();
-
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -62,6 +61,7 @@ public class ProdutoServlet extends HttpServlet {
 			String nome = request.getParameter("nome");
 			String valor = request.getParameter("valor");
 			String quantidade = request.getParameter("quantidade");
+			String categoria = request.getParameter("categoria_id");
 
 			BeanProduto produto = new BeanProduto();
 			produto.setId(!id.isEmpty() ? Long.parseLong(id) : null);
@@ -73,6 +73,7 @@ public class ProdutoServlet extends HttpServlet {
 				produto.setValor(Double.parseDouble(valorParse));
 			}
 			produto.setQuantidade(Double.parseDouble(quantidade));
+			produto.setCategoria_id(Long.parseLong(categoria));
 			try {
 				if (id == null || id.isEmpty() && !daoProduto.validarNome(nome)) {
 					request.setAttribute("msg", "Nome já cadastrado.");

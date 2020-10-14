@@ -21,11 +21,12 @@ public class DaoProduto {
 	
 	public void salvar(BeanProduto produto) {
 		try {
-			String sql = "INSERT INTO produto (nome, valor, quantidade) VALUES (?, ?, ?);";
+			String sql = "INSERT INTO produto (nome, valor, quantidade, categoria_id) VALUES (?, ?, ?, ?);";
 			PreparedStatement stm = connection.prepareStatement(sql);
 			stm.setString(1, produto.getNome());
 			stm.setDouble(2, produto.getValor());
 			stm.setDouble(3, produto.getQuantidade());
+			stm.setLong(4, produto.getCategoria_id());
 			stm.execute();
 			connection.commit();
 		} catch (SQLException e) {
@@ -51,6 +52,7 @@ public class DaoProduto {
 			produto.setNome(rst.getString("nome"));
 			produto.setQuantidade(rst.getDouble("quantidade"));
 			produto.setValor(rst.getDouble("valor"));
+			produto.setCategoria_id(rst.getLong("categoria_id"));
 			
 			listar.add(produto);
 		}
@@ -105,6 +107,7 @@ public class DaoProduto {
 			produto.setNome(rst.getString("nome"));
 			produto.setQuantidade(rst.getDouble("quantidade"));
 			produto.setValor(rst.getDouble("valor"));
+			produto.setCategoria_id(rst.getLong("categoria_id");
 			
 			return produto;
 		}
@@ -124,7 +127,7 @@ public class DaoProduto {
 	
 	public void atualizar(BeanProduto produto) {
 		String sql = "UPDATE produto "
-				+ " SET nome = ?, quantidade = ?, valor = ? "
+				+ " SET nome = ?, quantidade = ?, valor = ?, categoria_id = ? "
 				+ " WHERE id = " + produto.getId();
 		
 		try {
@@ -132,6 +135,7 @@ public class DaoProduto {
 			stm.setString(3, produto.getNome());
 			stm.setDouble(1, produto.getQuantidade());
 			stm.setDouble(2, produto.getValor());
+			stm.setLong(4, produto.getCategoria_id());
 
 			stm.executeUpdate();
 		} catch (SQLException e) {
