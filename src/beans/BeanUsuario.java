@@ -22,6 +22,7 @@ public class BeanUsuario {
 	private String tempFotoUser;
 	private boolean ativo;
 	private String sexo;
+	private String perfil;
 
 	private boolean atualizarImage = true;
 	private boolean atualizarPdf = true;
@@ -187,6 +188,14 @@ public class BeanUsuario {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public String getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
 	}
 
 }
