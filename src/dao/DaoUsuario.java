@@ -57,6 +57,14 @@ public class DaoUsuario {
 			}
 		}
 	}
+	
+	public List<BeanUsuario> listar (String descricaoconsulta) throws SQLException{
+		String sql = "SELECT * FROM usuario "
+				+ " WHERE login <> 'admin' AND "
+				+ " LOWER(nome) LIKE LOWER('%" + descricaoconsulta + "%') "
+				+ " ORDER BY nome"; 
+		return consultarUsuarios(sql);
+	}
 
 	public List<BeanUsuario> listar() throws SQLException {
 		List<BeanUsuario> listar = new ArrayList<>();
@@ -219,5 +227,40 @@ public class DaoUsuario {
 		beanUsuario.setPerfil(rst.getString("perfil"));
 		
 		return beanUsuario;
+	}
+	
+	private List<BeanUsuario> consultarUsuarios(String sql)
+			throws SQLException {
+		List<BeanUsuario> listar = new ArrayList<BeanUsuario>();
+		PreparedStatement statement = connection.prepareStatement(sql);
+		ResultSet resultSet = statement.executeQuery();
+		while (resultSet.next()) {
+			BeanUsuario beanUsuario = new BeanUsuario();
+			beanUsuario.setId(resultSet.getLong("id"));
+			beanUsuario.setLogin(resultSet.getString("login"));
+			beanUsuario.setSenha(resultSet.getString("senha"));
+			beanUsuario.setNome(resultSet.getString("nome"));
+			beanUsuario.setCep(resultSet.getString("cep"));
+			beanUsuario.setLogradouro(resultSet.getString("logradouro"));
+			beanUsuario.setBairro(resultSet.getString("bairro"));
+			beanUsuario.setCidade(resultSet.getString("cidade"));
+			beanUsuario.setUf(resultSet.getString("uf"));
+			beanUsuario.setIbge(resultSet.getString("ibge"));
+			beanUsuario.setContentType(resultSet.getString("contenttype"));
+			// beanCursoJsp.setFotoBase64(resultSet.getString("fotobase64"));
+			beanUsuario.setFotoBase64Miniatura(resultSet
+					.getString("fotobase64miniatura"));
+			beanUsuario.setCurriculoBase64(resultSet
+					.getString("curriculobase64"));
+			beanUsuario.setContentTypeCurriculo(resultSet
+					.getString("contenttypecurriculo"));
+			
+			beanUsuario.setAtivo(resultSet.getBoolean("ativo"));
+			beanUsuario.setSexo(resultSet.getString("sexo"));
+			beanUsuario.setPerfil(resultSet.getString("perfil"));
+			listar.add(beanUsuario);
+		}
+		
+		return listar;
 	}
 }
