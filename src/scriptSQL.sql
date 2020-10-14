@@ -82,6 +82,14 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.produto
     OWNER to postgres;
+    
+INSERT INTO public.categoria( nome ) VALUES ('BEBIDA');
+INSERT INTO public.categoria( nome ) VALUES ('HIGIENE');
+INSERT INTO public.categoria( nome ) VALUES ('LATICINIOS');
+INSERT INTO public.categoria( nome ) VALUES ('LIMPEZA');
+INSERT INTO public.categoria( nome ) VALUES ('GRAOS');
+INSERT INTO public.categoria( nome ) VALUES ('CARNES');
+
 
 -- ---------------------------------------------
 

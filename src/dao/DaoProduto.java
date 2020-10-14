@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import beans.BeanCategoria;
 import beans.BeanProduto;
 import connection.SingleConnection;
 
@@ -56,6 +57,23 @@ public class DaoProduto {
 		
 		
 		return listar;
+	}
+	
+	public List<BeanCategoria> listaCategorias() throws SQLException {
+		List<BeanCategoria> retorno = new ArrayList<BeanCategoria>();
+		
+		String sql = "SELECT * FROM categoria ";
+		PreparedStatement pst = connection.prepareStatement(sql);
+		ResultSet rst = pst.executeQuery();
+		
+		while (rst.next()) {
+			BeanCategoria categoria = new BeanCategoria();
+			categoria.setId(rst.getLong("id"));
+			categoria.setNome(rst.getString("nome"));
+			retorno.add(categoria);
+		}
+		return retorno;
+		
 	}
 	
 	public void delete(String id) {
